@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chrome Booster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@50..200,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="top-header">Currently in Experimental(Beta) Version!</div>
+        <div class="header">
+            <div class="date">Sunday, 7 Jan 2024</div>
+            <div class="activeRAM">FREE BETA(v0.625)</div>
+        </div>
+    
+        <div class="status-container">
+            <div class="status-circle">
+                <img src="../images/content_icons/rocket_icon.svg" alt="Booster Icon" class="booster-icon">
+            </div>
+            <p class="status-text">Booster is OFF</p>
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggleButton">
+                <span class="slider"></span>
+                <span class="slider-help-icon">
+                    <span class="slider-help-icon-tooltip">I'm still working on getting all the permissions right for the app I'm developing. Functionally, it's working as it should. Rest assured, every update will include the right tweaks to make everything perfect. If you want to see the correct values for now, just click again from the extensions section.</span>
+                    <span class="slider-help-icon-tooltip-corner"></span>
+                </span>
+                    
+            </label>
+            </div>
+            <div class="currently-active"></div>
+            <div class="info-box">
+                <div class="tab-info">
+                    <div class="active-tabs-counter">21</div>
+                    <span class="tab-label">Tabs</span>
+                </div>
+                <div class="extension-info">
+                    <div class="active-extensions">8</div>
+                    <span class="extension-label">Extension</span>
+                </div>
+            </div>
+            <div class="freeRAM">💡 Tips: if not working, use slider again or reopen extension. <br>Not working for macOS.</div>
+        </div>
+    
+        <div class="footer">
+            <p>AD AREA</p>
+        </div>
+    <script src="../background.js"></script>
+    <script src="../popup/popup.js"></script>
+</body>
+</html>

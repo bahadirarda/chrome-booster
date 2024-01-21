@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Sekme ve Uzantı Yöneticisi",
+    "description": "Aktif olmayan sekmeleri dondurur ve diğer uzantıları devre dışı bırakır.",
+    "version": "1.0.0",
+    "icons": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "tabs", "management", "storage"
+    ],
+    "action": {
+      "default_popup": "popup/popup.html"
+    }
+  }
+  
