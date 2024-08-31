@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Sekme ve Uzantı Yöneticisi",
-    "description": "Aktif olmayan sekmeleri dondurur ve diğer uzantıları devre dışı bırakır.",
+    "name": "RAM Boost & Clean Pro",
+    "description": "Optimize your system performance by freezing unused tabs and disabling inactive extensions to free up RAM instantly. RAM Boost & Clean Pro ensures your browser runs smoothly with minimal memory usage.",
     "version": "1.0.0",
     "icons": {
       "16": "images/icon16.png",
@@ -13,7 +13,7 @@
       "service_worker": "background.js"
     },
     "permissions": [
-      "tabs", "management", "storage"
+      "tabs", "management", "storage", "windows"
     ],
     "action": {
       "default_popup": "popup/popup.html"

@@ -1,3 +1,5 @@
+let initialExtensionCount = 0;
+
 // Toggle butonunun durumuna göre statü metnini güncelleyen fonksiyon
 function updateStatusText(isActive) {
     const statusText = document.querySelector('.status-text');
@@ -9,57 +11,106 @@ function updateStatusText(isActive) {
 // Tarihi güncelleyen fonksiyon
 function updateDate() {
     const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString('en-GB', {
-        weekday: 'long', 
+    const weekday = currentDate.toLocaleDateString('en-GB', { weekday: 'long' });
+    const date = currentDate.toLocaleDateString('en-GB', {
         day: 'numeric', 
         month: 'long', 
         year: 'numeric'
     });
-    document.querySelector('.date').textContent = formattedDate;
+
+    const weekdayElement = document.querySelector('.weekday');
+    const dateElement = document.querySelector('.date');
+
+    if (weekdayElement) {
+        weekdayElement.textContent = weekday;
+    }
+
+    if (dateElement) {
+        dateElement.textContent = date;
+    }
 }
+
+
 
 // Sekme ve uzantı sayısını güncelleyen fonksiyon
-function updateTabAndExtensionCount() {
-    chrome.tabs.query({}, function(tabs) {
-        document.querySelector('.active-tabs-counter').textContent = tabs.length;
-    });
+async function updateTabAndExtensionCount() {
+    const tabs = await chrome.tabs.query({ currentWindow: true });
+    const tabCounterElement = document.querySelector('.active-tabs-counter');
+    if (tabCounterElement) {
+        tabCounterElement.textContent = tabs.length;
+    }
 
-    chrome.management.getAll(function(extensions) {
-        const enabledExtensions = extensions.filter(extension => extension.enabled && extension.id !== chrome.runtime.id);
-        document.querySelector('.active-extensions').textContent = enabledExtensions.length;
-    });
+    const extensionCounterElement = document.querySelector('.active-extensions');
+    if (extensionCounterElement) {
+        extensionCounterElement.textContent = initialExtensionCount;
+    }
 }
 
-// Toggle butonu durumuna göre işlevsellik ekleyen fonksiyon
-function toggleFunctionality(isActive) {
-    // Booster'ın durumunu chrome.storage'da güncelle
-    chrome.storage.local.set({ 'isConversionActive': isActive });
+// Arka plandan gelen mesajları dinleyen fonksiyon
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (message.action === "updatePopup") {
+        const { activeExtensionsCount, frozenTabsCount } = message;
+        const extensionCounterElement = document.querySelector('.active-extensions');
+        const tabCounterElement = document.querySelector('.active-tabs-counter');
 
-    chrome.runtime.sendMessage({ action: "toggleButton", toggleState: isActive }, function(response) {
-        updateTabAndExtensionCount();
+        if (extensionCounterElement) {
+            extensionCounterElement.textContent = activeExtensionsCount;
+        }
+        if (tabCounterElement) {
+            tabCounterElement.textContent = frozenTabsCount;
+        }
+    }
+});
+
+// Toggle butonu durumuna göre işlevsellik ekleyen fonksiyon
+async function toggleFunctionality(isActive) {
+    // Booster'ın durumunu chrome.storage'da güncelle
+    chrome.storage.local.set({ 'isConversionActive': isActive }, function() {
+        if (chrome.runtime.lastError) {
+            console.error('Error setting isConversionActive:', chrome.runtime.lastError);
+        }
     });
+
+    chrome.runtime.sendMessage({ action: "toggleButton", isActive: isActive }, async function(response) {
+        if (chrome.runtime.lastError) {
+            // console.error('Error sending message:', chrome.runtime.lastError);
+        }
+        
+        // Booster kapalıysa uzantı sayısını başlangıçtaki değerden güncelle
+        if (!isActive) {
+            updateTabAndExtensionCount();
+        }
+    });
+
     updateStatusText(isActive);
 }
 
-
 // Popup yüklendiğinde çalışacak ana fonksiyon
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const toggleButton = document.getElementById('toggleButton');
+
 
     if (toggleButton) {
         toggleButton.addEventListener('click', function() {
-            toggleFunctionality(toggleButton.checked);
-        }, false);
+            const isActive = toggleButton.checked;
+            toggleFunctionality(isActive);
+        });
 
+        // Chrome Storage'dan mevcut durumu al ve güncelle
+        chrome.storage.local.get('isConversionActive', function(data) {
+            if (data && data.isConversionActive !== undefined) {
+                toggleButton.checked = data.isConversionActive;
+                updateStatusText(toggleButton.checked);
+            } else if (chrome.runtime.lastError) {
+                console.error('Error retrieving isConversionActive:', chrome.runtime.lastError);
+            }
+        });
     }
 
-    // Chrome Storage'dan mevcut durumu al ve güncelle
-    chrome.storage.local.get('isConversionActive', function(data) {
-        if (toggleButton) {
-            toggleButton.checked = data.isConversionActive || false;
-            updateStatusText(toggleButton.checked);
-        }
-    });
+
+    // Başlangıçta mevcut aktif uzantı sayısını al ve sakla
+    const extensions = await chrome.management.getAll();
+    initialExtensionCount = extensions.filter(extension => extension.enabled && extension.id !== chrome.runtime.id).length;
 
     updateDate();
     updateTabAndExtensionCount();
