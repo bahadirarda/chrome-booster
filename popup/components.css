@@ -1,0 +1,585 @@
+/* Dropdown ve Modal Komponentlerinin Stilleri */
+
+/* ================ STAT CARD VE DROPDOWN ================ */
+
+.stats-card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-large);
+  padding: var(--space-xs) var(--space-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-small);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Stat Divider */
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Stat Değerleri */
+.stat-value {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+  margin-top: 4px;
+}
+
+/* Label Alanı */
+.label-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 4px;
+  z-index: 3;
+}
+
+.stat-label {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+  transition: all 0.3s ease;
+}
+
+/* Dropdown İkon */
+.dropdown-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color-text-dimmed);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+/* Dropdown Tetikleyici */
+.dropdown-trigger {
+  cursor: pointer !important;
+  user-select: none;
+  position: relative;
+}
+
+.dropdown-trigger::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 2;
+}
+
+.dropdown-trigger:hover .stat-label {
+  color: var(--color-text);
+}
+
+.dropdown-trigger:hover .dropdown-icon {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+.dropdown-trigger.active .dropdown-icon {
+  color: var(--color-primary);
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+/* ================ MODAL DROPDOWN ================ */
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-overlay);
+  z-index: 999;
+  display: none;
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  animation: backdropFadeIn 0.3s forwards;
+}
+
+/* Modal Dropdown */
+.modal-dropdown {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  z-index: 1000;
+  width: 90%;
+  max-width: 320px;
+  display: none;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.modal-dropdown.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  animation: modalFadeIn 0.3s forwards;
+}
+
+/* Modal İçeriği */
+.modal-content {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-large);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1001;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-md) var(--space-xs);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(to right, rgba(36, 42, 56, 0.7), rgba(26, 31, 44, 0.7));
+}
+
+.modal-header h4 {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Modal Kapatma Butonu - Sadeleştirildi */
+.close-modal {
+  background: none;
+  border: none;
+  color: var(--color-text-dimmed);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  position: relative;
+}
+
+.close-modal:hover {
+  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.close-modal:active {
+  transform: scale(0.95);
+}
+
+.modal-description {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+  margin: 0;
+  padding: var(--space-xs) var(--space-md);
+}
+
+/* Arama Alanı */
+.search-container {
+  padding: var(--space-xs) var(--space-md) var(--space-sm);
+}
+
+.search-input {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-medium);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-sm);
+  color: var(--color-text);
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(79, 172, 254, 0.4);
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.15);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-dimmed);
+}
+
+/* Seçim Konteyneri */
+.selection-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 300px;
+}
+
+/* Seçilen Öğeler (Chips) */
+.selected-items {
+  padding: 0 var(--space-md) var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  min-height: 30px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.selected-chip {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-full);
+  padding: 2px 8px 2px 10px;
+  font-size: var(--font-xs);
+  color: var(--color-primary);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  user-select: none;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+}
+
+.chip-remove {
+  font-size: 14px;
+  margin-left: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.chip-remove:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Seçim Listesi */
+.selection-list {
+  flex-grow: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  padding: var(--space-xs) 0;
+  max-height: 200px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Seçim Seçenekleri */
+.selection-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.selection-option {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  border-left: 2px solid transparent;
+}
+
+.selection-option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 2px solid var(--color-primary-dark);
+}
+
+.selection-option.selected {
+  background-color: var(--color-primary-light);
+  border-left: 2px solid var(--color-primary);
+}
+
+.selection-checkbox {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-small);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-right: var(--space-sm);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.selection-option.selected .selection-checkbox {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.selection-checkbox::after {
+  content: "";
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: all 0.2s ease;
+  margin-top: -2px;
+}
+
+.selection-option.selected .selection-checkbox::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.selection-label {
+  flex-grow: 1;
+  font-size: var(--font-sm);
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: var(--space-sm);
+}
+
+.selection-option.selected .selection-label {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Yükleniyor Yer Tutucusu */
+.loading-placeholder {
+  padding: var(--space-md);
+  text-align: center;
+  color: var(--color-text-dimmed);
+  font-style: italic;
+  font-size: var(--font-sm);
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.selection-count {
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+}
+
+.modal-action-btn {
+  background: linear-gradient(135deg, var(--color-primary), #00f2fe);
+  color: white;
+  border: none;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-sm);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-action-btn:active {
+  transform: translateY(0);
+}
+
+.modal-action-btn.saved {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.modal-action-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.4);
+}
+
+.modal-action-btn:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translate(-50%, -55%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Kaydırma Çubuğu Stili */
+.selection-list::-webkit-scrollbar,
+.selected-items::-webkit-scrollbar {
+  width: 4px;
+}
+
+.selection-list::-webkit-scrollbar-track,
+.selected-items::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+}
+
+.selection-list::-webkit-scrollbar-thumb,
+.selected-items::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+}
+
+.selection-list::-webkit-scrollbar-thumb:hover,
+.selected-items::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Dropdown Backdrop */
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  background: transparent;
+  display: none;
+}
+
+.dropdown-backdrop.active {
+  display: block;
+}
+
+/* Seçim Odağı */
+.selection-option:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Modal açıkken body overflow'u gizle */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Mobil uyumluluk ve duyarlılık */
+@media (max-width: 360px) {
+  .modal-dropdown {
+    width: 95%;
+    max-width: 300px;
+  }
+  
+  .modal-content {
+    max-height: 85vh;
+  }
+  
+  .selection-container {
+    max-height: 250px;
+  }
+  
+  .selection-list {
+    max-height: 180px;
+  }
+}
+
+/* Dokunmatik cihazlar için */
+.touch-device .selection-option {
+  padding: var(--space-sm) var(--space-md);
+  min-height: 44px;
+}
+
+.touch-device .close-modal {
+  width: 44px;
+  height: 44px;
+  font-size: 28px;
+}
+
+.touch-device .chip-remove {
+  width: 24px;
+  height: 24px;
+}
+
+/* Modal etkileşimleri için z-index düzeni */
+.modal-stack {
+  --z-backdrop: 999;
+  --z-modal: 1000;
+  --z-modal-content: 1001;
+  --z-close-button: 1002;
+}
+
+/* Modal geçiş efektleri */
+.modal-dropdown {
+  will-change: transform, opacity;
+}
+
+/* Modal transition zamanlamaları */
+.modal-transition-fast {
+  transition-duration: 200ms;
+}
+
+.modal-transition-normal {
+  transition-duration: 300ms;
+}
+
+.modal-transition-slow {
+  transition-duration: 400ms;
+}
+
+/* Platform uyumluluk düzeltmeleri */
+input, button, select, textarea {
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* iOS klavye düzeltmeleri */
+@supports (-webkit-touch-callout: none) {
+  .modal-dropdown.keyboard-open {
+    position: absolute;
+    top: 25%;
+    bottom: auto;
+  }
+}

@@ -1,296 +1,320 @@
+/* Ana stil dosyası - Genel yapı ve taban stiller */
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Modern Koyu Mavi Renk Paleti */
+  --color-primary: #4facfe;
+  --color-primary-dark: #2f86f6;
+  --color-primary-light: rgba(79, 172, 254, 0.15);
+  --color-primary-glow: rgba(79, 172, 254, 0.5);
+  
+  --color-secondary: #6a11cb;
+  --color-secondary-light: rgba(106, 17, 203, 0.1);
+  
+  /* Dark Mode Renkler */
+  --color-bg: #1a1f2c;
+  --color-card-bg: #242a38;
+  --color-card-hover: #2d3446;
+  
+  /* Text Renkleri */
+  --color-text: #e4e6eb;
+  --color-text-light: #b0b3b8;
+  --color-text-dimmed: #777c85;
+  --color-text-muted: #555a64;
+  
+  --color-error: #ff5c5c;
+  --color-overlay: rgba(26, 31, 44, 0.85);
+  
+  /* Shadow */
+  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  /* Border Radius */
+  --radius-small: 8px;
+  --radius-medium: 12px;
+  --radius-large: 18px;
+  --radius-full: 999px;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  
+  /* Font Sizes */
+  --font-xs: 11px;
+  --font-sm: 13px;
+  --font-md: 14px;
+  --font-lg: 16px;
+  --font-xl: 18px;
+  --font-xxl: 24px;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-secondary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+
+  /* Sistem Durumu Renkleri */
+  --color-status-normal: #2ecc71;
+  --color-status-moderate: #f1c40f;
+  --color-status-high: #e67e22;
+  --color-status-critical: #e74c3c;
+  
+  /* Z-index Hiyerarşisi */
+  --z-base: 1;
+  --z-cards: 2;
+  --z-dropdowns: 10;
+  --z-modals: 100;
+  --z-overlay: 99;
+  --z-tooltip: 999;
+  
+  /* Animasyon Süreleri */
+  --time-fast: 150ms;
+  --time-normal: 300ms;
+  --time-slow: 500ms;
+  
+  /* Animasyon Eğrileri */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html, body {
+  height: 100%;
+  max-height: 600px; /* Chrome popup için makul bir maksimum yükseklik */
+}
+
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-image: url('../images/menu/bg-blue.jpg');
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 520px;
-    width: 375px;
-    /* justify-content: space-between; */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--color-text);
+  font-size: var(--font-md);
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  background-image: linear-gradient(160deg, var(--color-bg), #131823);
+  width: 340px;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--radius-medium);
+  height: auto; /* Auto height */
+  min-height: 100%;
+  overflow-y: hidden; /* Aşağı kaydırma çubuğunu gizle */
 }
 
-.top-header {
-    display: none;
-    text-align: center;
-    padding: 3px;
-    border: 1px;
-    text-wrap: nowrap;
+/* Main Container */
+.app-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  box-shadow: var(--shadow-large);
+  background-color: var(--color-bg);
 }
 
-.header {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 25px 0px;
-    margin-bottom: 30px;
-    font-weight: 600;
-    text-align: left; 
+/* Header Styles */
+.app-header {
+  position: relative;
+  padding: var(--space-md) var(--space-md) var(--space-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(to right, rgba(36, 42, 56, 0.5), rgba(26, 31, 44, 0.5));
+  backdrop-filter: blur(8px);
 }
 
-.left-section {
-    display: flex;
-    flex-direction: column; 
-    margin-left: 30px; 
+/* Version Container */
+.version-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Version */
+.version {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-small);
+}
+
+/* Beta Badge */
+.beta-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(49, 92, 180, 0.9);
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: var(--radius-small);
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.date-section {
+  text-align: left;
 }
 
 .weekday {
-    font-weight: bold; 
-    margin-bottom: 1px; 
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: -2px;
 }
 
 .date {
-    margin-top: 0; 
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
 }
 
-.activeRAM {
-    margin-right: 30px; 
-    font-family: 'Inconsolata', sans-serif;
-    font-weight: bolder;
-    margin-top: 4px;
+/* Content Area */
+.app-content {
+  flex: 1;
+  padding: var(--space-md) var(--space-md) var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.status-container {
-    text-align: center;
+/* Error Message */
+.error-message {
+  background-color: rgba(255, 92, 92, 0.15);
+  color: var(--color-error);
+  padding: var(--space-md);
+  border-radius: var(--radius-medium);
+  font-size: var(--font-sm);
+  text-align: center;
+  display: none;
+  border-left: 3px solid var(--color-error);
+  box-shadow: var(--shadow-small);
+  border: 1px solid rgba(255, 92, 92, 0.2);
 }
 
-.status-circle {
-    width: 150px;
-    height: 150px;
-    background-color: whitesmoke;
-    border-radius: 50%;
-    display: inline-block;
-    margin-top: -35px;
-    box-shadow: 0 0 10px 4px rgb(0, 0, 0, 0.2);
+.error-message.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
 }
 
-.booster-icon {
-    margin-top: 37px;
-    width: 50px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.status-text {
-    margin-top: 25px;
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: -1px;
+/* Animasyon Stilleri */
+@keyframes countUp {
+  from { opacity: 0.3; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 70px;
-    height: 40px;
-    margin: 10px auto;
-    margin-left: -20px;
+@keyframes pulse {
+  from { opacity: 0.7; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1.05); }
 }
 
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+@keyframes moveStripes {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 0 0, 60px 0; }
 }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #F2F2F2;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    text-align: center;
-    line-height: 32px;
-    height: 32px;
-    width: 32px;
-    left: 4px;
-    bottom: 4px;
-    background-color: #0B2AD9;
-    transition: .6s;
-    border-radius: 50%;
-}
-
-input:checked+.slider {
-    background-color: #04D976;
-}
-
-input:checked+.slider:before {
-    content: "";
-    transform: translateX(30px);
-    background-color: whitesmoke;
-}
-
-.slider-help-icon {
-    width: 16px;
-    height: 16px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: flex;
-    position: relative;
-    margin-left: 75px;
-    margin-top: -5px;
-    z-index: 99;
-    background-image: url("/images/content_icons/slider-tooltip.svg")
-}
-
-.slider-help-icon-tooltip {
-    font-family: 'Inconsolata', sans-serif;
-    background-color: #212121;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 3px;
-    padding: 9px 12px 8px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
-    position: absolute;
-    z-index: 999;
-    width: 170px;
-    left: -119px;
-    bottom: 33px;
-    visibility: hidden;
-}
-
-.slider-help-icon-tooltip-corner {
-    visibility: hidden;
-    position: absolute;
-    z-index: 1000;
-    width: 0;
-    height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #212121; 
-    bottom: 100%; 
-    top: -17px;
-    left: -4px;
-}
-
-
-.slider-help-icon-tooltip, .slider-help-icon-tooltip-corner {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-
-.slider-help-icon:hover .slider-help-icon-tooltip,
-.slider-help-icon:hover .slider-help-icon-tooltip-corner {
+@keyframes optimizing {
+  0% {
+    opacity: 0.5;
+    color: var(--color-primary);
+    text-shadow: 0 0 5px rgba(79, 172, 254, 0.3);
+  }
+  50% {
     opacity: 1;
-    visibility: visible;
+    color: #00f2fe;
+    text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+  }
+  100% {
+    opacity: 0.5;
+    color: var(--color-primary);
+    text-shadow: 0 0 5px rgba(79, 172, 254, 0.3);
+  }
 }
 
-.currently-active {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    margin-bottom: 30px;
+@keyframes fadeInFast {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.info-box {
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    border: 1px solid whitesmoke;
-    padding: 10px 5px;
-    border-radius: 3px;
-    position: relative;
-    background: linear-gradient(to top, #1F4EFC, #001B51);
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-.info-box::before {
-    content: 'Currently Active';
-    background-color: white; 
-    padding: 5px 10px;
-    color: #002796;
-    text-wrap: nowrap;
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 5px;
-    font-size: 10px;
-    font-weight: 600;
+@keyframes slideInFromBottom {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.tab-info::after {
-    content: '';
-    position: absolute;
-    right: 50%;
-    top: 50%; 
-    transform: translateY(-40%);
-    height: 50%;
-    width: 1px;
-    background-color: #fff;
-    z-index: 1;
+/* Genel Hover Efektleri */
+.hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  background-color: var(--color-card-hover);
 }
 
-
-
-
-.info-box div {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    padding: 0px 20px;
-    margin: 0 5px;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 5px;
+/* Count Animation */
+.count-animation {
+  animation: countUp 0.7s ease-out forwards;
 }
 
-.active-tabs-counter {
-    font-size: 24px; 
-    font-weight: bold; 
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-full);
+  transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.tab-label {
-    font-size: 16px; 
-    display: inline-flex;
-    margin-block: auto;
-    margin-bottom: -10;
+/* CPU Status Class Stilleri */
+.status-normal {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
 }
 
-.active-extensions {
-    margin-left: 19px!important;
+.status-moderate {
+  background-color: rgba(241, 196, 15, 0.15);
+  color: #f1c40f;
 }
 
-
-
-
-.extension-label {
-    font-size: 16px; 
-    display: inline-flex;
-    margin-block: auto;
-    margin-left: 20px;
+.status-high {
+  background-color: rgba(230, 126, 34, 0.15);
+  color: #e67e22;
 }
 
-
-.freeRAM {
-    font-family: 'Inconsolata', sans-serif;
-    font-size: 10px;
-    justify-content: center;
-    margin-top: 10px;
-    text-align: center;
+.status-critical {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
 }
 
-.footer {
-    display: none;
-    background: linear-gradient(to bottom, #FFFFFF, #BCBEC0); ;
-    width: 375px;
-    height: 80px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 20px;
-    color: black;
+/* Safari ve iOS için özel düzeltmeler */
+@supports (-webkit-touch-callout: none) {
+  input, button, textarea, select {
+    font-size: 16px; /* iOS'da yakınlaştırmayı engeller */
+  }
+}
+
+/* Erişilebilirlik iyileştirmeleri */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

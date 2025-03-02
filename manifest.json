@@ -1,22 +1,36 @@
 {
-    "manifest_version": 3,
-    "name": "RAM Boost & Clean Pro",
-    "description": "Optimize your system performance by freezing unused tabs and disabling inactive extensions to free up RAM instantly. RAM Boost & Clean Pro ensures your browser runs smoothly with minimal memory usage.",
-    "version": "1.0.0",
-    "icons": {
+  "manifest_version": 3,
+  "name": "Chrome Booster",
+  "description": "Boost Chrome performance by freezing inactive tabs and managing extensions.",
+  "version": "0.9",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "tabs", 
+    "management", 
+    "storage", 
+    "system.memory",
+    "system.cpu"
+  ],
+  "host_permissions": [],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",
       "48": "images/icon48.png",
       "128": "images/icon128.png"
-    },
-    "background": {
-      "service_worker": "background.js"
-    },
-    "permissions": [
-      "tabs", "management", "storage", "windows"
-    ],
-    "action": {
-      "default_popup": "popup/popup.html"
     }
   }
-  
+}

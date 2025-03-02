@@ -1,0 +1,188 @@
+/* Metrikler için stil dosyası - RAM ve CPU göstergeleri */
+
+/* Resource Metrics */
+.resource-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Metric Item */
+.metric-item {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  padding: var(--space-xs) 0;
+}
+
+/* Metrik İkon */
+.metric-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-medium);
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.ram-icon {
+  color: #5ae4ff;
+  background: rgba(90, 228, 255, 0.1);
+}
+
+.cpu-icon {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.1);
+}
+
+.metric-item:hover .metric-icon {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.metric-data {
+  flex: 1;
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.metric-name {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.metric-value {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.metric-value .unit-text {
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.metric-value .count-animation {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font-md);
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+.ram-icon + .metric-data .count-animation {
+  color: #5ae4ff;
+}
+
+.cpu-icon + .metric-data .count-animation {
+  color: #3498db;
+}
+
+.unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-dimmed);
+  margin-right: 3px;
+}
+
+/* Progress Bars */
+.progress-bar {
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+#progressFill {
+  background-image: linear-gradient(
+    90deg,
+    #5ae4ff 0%, 
+    #00f2fe 100%
+  ),
+  repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 10px,
+    rgba(255, 255, 255, 0.2) 10px,
+    rgba(255, 255, 255, 0.2) 20px
+  );
+  animation: moveStripes 30s linear infinite;
+}
+
+.cpu-normal {
+  background-image: linear-gradient(
+    90deg,
+    #2ecc71 0%,
+    #27ae60 100%
+  );
+}
+
+.cpu-moderate {
+  background-image: linear-gradient(
+    90deg,
+    #f1c40f 0%,
+    #f39c12 100%
+  );
+}
+
+.cpu-high {
+  background-image: linear-gradient(
+    90deg,
+    #e67e22 0%,
+    #d35400 100%
+  );
+}
+
+.cpu-critical {
+  background-image: linear-gradient(
+    90deg,
+    #e74c3c 0%,
+    #c0392b 100%
+  );
+}
+
+.metric-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-xs);
+  color: var(--color-text-dimmed);
+}
+
+.cpu-status {
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.cpu-model {
+  color: var(--color-text-light);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.memory-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-dimmed);
+}
+
+/* Optimizing Animation */
+.memory-value span:first-child.optimizing,
+#memorySaved.optimizing {
+  animation: optimizing 1.5s ease-in-out infinite;
+}

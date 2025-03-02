@@ -2,54 +2,226 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>RAM Boost & Clean Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@50..200,200..900&display=swap" rel="stylesheet">
+    <title>Chrome Booster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="cards.css">
+    <link rel="stylesheet" type="text/css" href="metrics.css">
+    <link rel="stylesheet" type="text/css" href="components.css">
 </head>
 <body>
-    <div class="top-header">Currently in Experimental(Beta) Version!</div>
-    <div class="header">
-        <div class="left-section">
-            <div class="weekday">Saturday</div>
-            <div class="date">31 August 2024</div>
-        </div>
-        <div class="activeRAM">BETA(v0.7)</div>
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="date-section">
+                <h2 class="weekday">Saturday</h2>
+                <p class="date">31 August 2024</p>
+            </div>
+            <div class="version-container">
+                <div class="version">v0.9</div>
+                <div class="beta-badge">BETA VERSION</div>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <section class="booster-card">
+                <div class="booster-status">
+                    <div class="rocket-container">
+                        <!-- SVG doğrudan HTML içinde ve beyaz renkte -->
+                        <svg class="rocket-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                            <path d="M13.13 22.19L11.5 18.36C13.07 17.78 14.54 17 15.9 16.09L13.13 22.19M5.64 12.5L1.81 10.87L7.91 8.1C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39C21.61 2.39 16.66 .269 11 5.93C8.81 8.12 7.5 10.53 6.65 12.64C6.37 13.39 6.56 14.21 7.11 14.77L9.24 16.89C9.79 17.45 10.61 17.63 11.36 17.35C13.5 16.53 15.88 15.19 18.07 13C23.73 7.34 21.61 2.39 21.61 2.39M14.54 9.46C13.76 8.68 13.76 7.41 14.54 6.63S16.59 5.85 17.37 6.63C18.14 7.41 18.15 8.68 17.37 9.46C16.59 10.24 15.32 10.24 14.54 9.46M8.88 16.53L7.47 15.12L8.88 16.53Z"/>
+                        </svg>
+                    </div>
+                    <div class="status-info">
+                        <h3 class="status-text">Booster is OFF</h3>
+                        <p class="status-description">Optimize Chrome memory usage</p>
+                    </div>
+                </div>
+                
+                <div class="toggle-container">
+                    <label class="toggle">
+                        <input type="checkbox" id="toggleButton">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="help-icon" title="Help">?
+                        <span class="tooltip">I'm still working on getting all the permissions right for the app. Every update will include the right tweaks to make everything perfect.</span>
+                    </span>
+                </div>
+            </section>
+
+            <div class="error-message" id="errorMessage"></div>
+            
+            <section class="stats-card">
+                <div class="stat-item dropdown-trigger" data-dropdown="tab-dropdown">
+                    <div class="label-area">
+                        <span class="stat-label tab-label">Tabs</span>
+                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+                            <path fill="currentColor" d="M7,10L12,15L17,10H7Z"/>
+                        </svg>
+                    </div>
+                    <span class="stat-value active-tabs-counter">0</span>
+                </div>
+                
+                <div class="stat-divider"></div>
+                
+                <div class="stat-item dropdown-trigger" data-dropdown="ext-dropdown">
+                    <div class="label-area">
+                        <span class="stat-label extension-label">Extensions</span>
+                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+                            <path fill="currentColor" d="M7,10L12,15L17,10H7Z"/>
+                        </svg>
+                    </div>
+                    <span class="stat-value active-extensions">0</span>
+                </div>
+            </section>
+            
+            <!-- Birleştirilmiş Resource Kartı -->
+            <section class="resource-card">
+                <div class="resource-header">
+                    <h3 class="resource-title">System Resources</h3>
+                    <div class="resource-badge" id="boosterStatus">Inactive</div>
+                </div>
+                
+                <div class="resource-metrics">
+                    <!-- RAM Metriği (Kart İçeriği) -->
+                    <div class="metric-item">
+                        <div class="metric-icon ram-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M17,17H7V7H17M21,11V9H19V7C19,5.89 18.1,5 17,5H15V3H13V5H11V3H9V5H7C5.89,5 5,5.89 5,7V9H3V11H5V13H3V15H5V17A2,2 0 0,0 7,19H9V21H11V19H13V21H15V19H17A2,2 0 0,0 19,17V15H21V13H19V11M13,13H11V11H13Z" />
+                            </svg>
+                        </div>
+                        <div class="metric-data">
+                            <div class="metric-header">
+                                <span class="metric-name">RAM</span>
+                                <span class="metric-value">
+                                    <span id="memorySaved" class="count-animation">0</span>
+                                    <span class="unit">MB</span> 
+                                    <span id="savingType" class="unit-text">saved</span>
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="metric-details">
+                                <span class="memory-used"><span id="usedMemory">0</span> <span class="memory-unit">MB</span> used</span>
+                                <span class="memory-total"><span id="totalMemory">0</span> <span class="memory-unit">GB</span> total</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CPU Metriği -->
+                    <div class="metric-item">
+                        <div class="metric-icon cpu-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M9,3V5H7A2,2 0 0,0 5,7V9H3V11H5V13H3V15H5V17A2,2 0 0,0 7,19H9V21H11V19H13V21H15V19H17A2,2 0 0,0 19,17V15H21V13H19V11H21V9H19V7A2,2 0 0,0 17,5H15V3H13V5H11V3M7,9H10.5A1.5,1.5 0 0,1 12,10.5A1.5,1.5 0 0,1 10.5,12H7V9M7,15H12.5A1.5,1.5 0 0,1 14,16.5A1.5,1.5 0 0,1 12.5,18H7V15M17,12V7H12V12H17Z" />
+                            </svg>
+                        </div>
+                        <div class="metric-data">
+                            <div class="metric-header">
+                                <span class="metric-name">CPU</span>
+                                <span class="metric-value"><span id="cpuUsage" class="count-animation">0</span><span class="unit">%</span> usage</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cpuProgressFill"></div>
+                            </div>
+                            <div class="metric-details">
+                                <span id="cpuStatus" class="cpu-status status-normal">Normal</span>
+                                <span id="cpuModel" class="cpu-model">Processing...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-footer">
+                    <div id="resourceDescription" class="resource-description">
+                        Optimize your Chrome's performance
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Info card aşağıya taşındı -->
+            <section class="info-card compact">
+                <div class="info-icon">💡</div>
+                <div class="info-content">
+                    <p>Booster freezes all tabs except the active one to save memory.</p>
+                    <p class="info-note">Not compatible with macOS.</p>
+                </div>
+            </section>
+        </main>
     </div>
     
-        <div class="status-container">
-            <div class="status-circle">
-                <img src="../images/content_icons/rocket_icon.svg" alt="Booster Icon" class="booster-icon">
+    <!-- Tab Exclusions Modal -->
+    <div class="modal-dropdown" id="tab-dropdown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Tab Exclusions</h4>
+                <button class="close-modal">&times;</button>
             </div>
-            <p class="status-text">Booster is OFF</p>
-            <label class="toggle-switch">
-                <input type="checkbox" id="toggleButton">
-                <span class="slider"></span>
-                <span class="slider-help-icon">
-                    <span class="slider-help-icon-tooltip">I'm still working on getting all the permissions right for the app I'm developing. Functionally, it's working as it should. Rest assured, every update will include the right tweaks to make everything perfect.</span>
-                    <span class="slider-help-icon-tooltip-corner"></span>
-                </span>
-                    
-            </label>
+            <p class="modal-description">Select tabs you want to keep active:</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="tab-search" placeholder="Search tabs...">
             </div>
-            <div class="currently-active"></div>
-            <div class="info-box">
-                <div class="tab-info">
-                    <div class="active-tabs-counter">21</div>
-                    <span class="tab-label">Tabs</span>
+            
+            <div class="selection-container">
+                <div class="selected-items" id="selected-tabs">
+                    <!-- Selected tabs will appear here as chips -->
                 </div>
-                <div class="extension-info">
-                    <div class="active-extensions">8</div>
-                    <span class="extension-label">Extension</span>
+                
+                <div class="selection-list">
+                    <div class="selection-options" id="tab-options">
+                        <!-- Tab options will be dynamically added here -->
+                        <div class="loading-placeholder">Loading tabs...</div>
+                    </div>
                 </div>
             </div>
-            <div class="freeRAM">💡 Tips: if not working, use slider again or reopen extension. <br>Not working for macOS.</div>
+            
+            <div class="modal-footer">
+                <span class="selection-count" id="tab-selection-count">0 selected</span>
+                <button class="modal-action-btn" id="save-tab-exclusions">Save</button>
+            </div>
         </div>
+    </div>
     
-        <div class="footer">
-            <p>AD AREA</p>
+    <!-- Extension Exclusions Modal -->
+    <div class="modal-dropdown" id="ext-dropdown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Extension Exclusions</h4>
+                <button class="close-modal">&times;</button>
+            </div>
+            <p class="modal-description">Select extensions you want to keep enabled:</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="ext-search" placeholder="Search extensions...">
+            </div>
+            
+            <div class="selection-container">
+                <div class="selected-items" id="selected-extensions">
+                    <!-- Selected extensions will appear here as chips -->
+                </div>
+                
+                <div class="selection-list">
+                    <div class="selection-options" id="extension-options">
+                        <!-- Extension options will be dynamically added here -->
+                        <div class="loading-placeholder">Loading extensions...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <span class="selection-count" id="ext-selection-count">0 selected</span>
+                <button class="modal-action-btn" id="save-extension-exclusions">Save</button>
+            </div>
         </div>
-    <script src="../background.js"></script>
-    <script src="../popup/popup.js"></script>
+    </div>
+    
+    <!-- Backdrop for modals -->
+    <div class="modal-backdrop"></div>
+    
+    <!-- Modalların çalışması için önce modal handler'ı yükleyelim -->
+    <script src="modal-handler.js"></script>
+    <script src="popup.js"></script>
 </body>
 </html>
