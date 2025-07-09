@@ -618,6 +618,31 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
     }
+
+    // Setup timer buttons
+    const timerInput = document.getElementById('timerMinutes');
+    const startTimerBtn = document.getElementById('startTimerButton');
+    const presetButtons = document.querySelectorAll('.preset-btn');
+
+    presetButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mins = btn.dataset.minutes;
+            if (timerInput) {
+                timerInput.value = mins;
+            }
+        });
+    });
+
+    if (startTimerBtn) {
+        startTimerBtn.addEventListener('click', () => {
+            const minutes = parseInt(timerInput.value, 10) || 1;
+            chrome.runtime.sendMessage({ action: 'activateTimedFreeze', duration: minutes }, (response) => {
+                if (!response || !response.success) {
+                    showError('Failed to start timer');
+                }
+            });
+        });
+    }
     
     // Initialize counters with fallback values in case getState fails
     updateCounters(1, 0, false);
