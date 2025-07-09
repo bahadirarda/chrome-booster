@@ -79,7 +79,10 @@ async function estimatePotentialSavings() {
     // Aktif tabları ve uzantıları al
     const tabs = await chrome.tabs.query({});
     const extensions = await chrome.management.getAll();
-    const activeExtensions = extensions.filter(ext => ext.enabled && ext.type !== 'theme');
+    // Exclude this extension from the list to avoid overestimating savings
+    const activeExtensions = extensions.filter(
+      ext => ext.enabled && ext.type !== 'theme' && ext.id !== chrome.runtime.id
+    );
     
     // Aktif, Chrome tarafından donmuş ve bizim tarafımızdan donmuş tabları ayır
     const activeTabs = tabs.filter(tab => !tab.discarded && !frozenTabsSet.has(tab.id));
