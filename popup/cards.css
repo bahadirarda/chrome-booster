@@ -68,6 +68,41 @@
   align-items: center;
 }
 
+.timer-container {
+  margin-left: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.timer-input {
+  width: 50px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+  border-radius: var(--radius-small);
+  padding: var(--space-xs) var(--space-xs);
+}
+
+.preset-buttons {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.preset-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: var(--space-xs) var(--space-xs);
+  border-radius: var(--radius-small);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--font-xs);
+}
+
+.preset-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .toggle {
   position: relative;
   display: inline-block;

@@ -47,6 +47,15 @@
                     <span class="help-icon" title="Help">?
                         <span class="tooltip">I'm still working on getting all the permissions right for the app. Every update will include the right tweaks to make everything perfect.</span>
                     </span>
+                    <div class="timer-container">
+                        <input type="number" id="timerMinutes" class="timer-input" min="1" value="5">
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-minutes="1">1m</button>
+                            <button class="preset-btn" data-minutes="5">5m</button>
+                            <button class="preset-btn" data-minutes="15">15m</button>
+                        </div>
+                        <button class="modal-action-btn" id="startTimerButton">Start Timer</button>
+                    </div>
                 </div>
             </section>
 

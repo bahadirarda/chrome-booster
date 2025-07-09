@@ -10,6 +10,9 @@ let currentWindowId = null;
 // Kaynak izleme durumu için değişken
 let isResourceReadingActive = false;
 
+// Timer handle for temporary freeze feature
+let freezeTimer = null;
+
 let tabExclusions = []; // Dondurulmayacak sekme ID'leri listesi
 let extensionExclusions = []; // Devre dışı bırakılmayacak uzantı ID'leri listesi
 
@@ -121,6 +124,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         }
         
         sendResponse({ success: true });
+        return true;
+    } else if (request.action === 'activateTimedFreeze') {
+        // Activate temporary freeze mode for given duration in minutes
+        const minutes = Number(request.duration) || 5;
+        startTimedFreeze(minutes * 60000)
+            .then(() => {
+                sendResponse({ success: true });
+            })
+            .catch(error => {
+                console.error('Timed freeze error:', error);
+                sendResponse({ success: false, error: error.message });
+            });
         return true;
     }
     
@@ -370,6 +385,23 @@ function startIntensiveResourceMonitoring(isBoosterActive) {
         isResourceReadingActive = false;
         updatePopupData(); // Son bir güncelleme daha yap
     }, 30000);
+}
+
+// Enable booster for a limited time
+async function startTimedFreeze(durationMs = 300000) {
+    await toggleExtension(true);
+
+    // Clear existing timer if any
+    if (freezeTimer) {
+        clearTimeout(freezeTimer);
+    }
+
+    // Disable booster after the specified duration
+    freezeTimer = setTimeout(() => {
+        toggleExtension(false).finally(() => {
+            freezeTimer = null;
+        });
+    }, durationMs);
 }
 
 // Freeze tabs when extension is activated
